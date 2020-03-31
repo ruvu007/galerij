@@ -26,19 +26,3 @@ const allImages = [
     ];
 
 const allbox = document.getElementById('box');
-
-function uploadImage(url) {
-    let imgdiv = document.createElement('div');
-    imgdiv.className = 'imgdiv';
-    let mainimg = document.createElement('img');
-    mainimg.src = url;
-    mainimg.alt = 'Image loading';
-    imgdiv.append(mainimg);
-    allbox.append(imgdiv);
-}
-
-for(let i=allImages.length; i>0; i--) {
-    let nmmr = Math.floor(Math.random()*allImages.length)
-    uploadImage(allImages[nmmr]);
-    allImages.splice(nmmr,1);
-}
