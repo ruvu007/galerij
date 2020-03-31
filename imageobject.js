@@ -28,12 +28,39 @@ function uploadImage(obj) {
 }
 
 function showRandomImages() {
-    for(let i=allImages.length; i>0; i--) {
-        let nmmr = Math.floor(Math.random()*allImages.length)
+    for(let i=objectArray.length; i>0; i--) {
+        let nmmr = Math.floor(Math.random()*objectArray.length)
         uploadImage(objectArray[nmmr]);
         objectArray.splice(nmmr,1);
     }
 }
 
-createObjects();
+function createJSON() {
+    let id = document.getElementById('json');
+
+    let applicationData = "application/json;charset=utf-8,"
+    + encodeURIComponent(JSON.stringify(objectArray));
+
+    let json = document.createElement('a');
+    json.href = 'data:' + applicationData;
+    json.download = 'json.json';
+    json.innerHTML = 'Ready to download json file';
+
+    id.appendChild(json);
+}
+
+function requestListener () {
+    let obj = JSON.parse(this.responseText);
+    objectArray = obj.slice();
+}
+
+function createGetRequest() {
+    let request = new XMLHttpRequest();
+    request.addEventListener("load", requestListener);
+
+    request.open("GET", "data/json.json", false);
+    request.send();
+}
+
+createGetRequest();
 showRandomImages();
