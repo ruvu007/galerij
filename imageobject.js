@@ -14,7 +14,7 @@ function createObjects() {
     }
 }
 
-function uploadImage(imgObj) {
+function uploadImage(obj) {
     let imgdiv = document.createElement('div');
     imgdiv.className = 'imgdiv';
 
